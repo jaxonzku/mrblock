@@ -1,42 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Playercontroller : MonoBehaviour
 {
 
 
     public Rigidbody2D rigidbody2D;
     public float speed;
+    public GameObject gameWonPanel;
+    public GameObject gameLostPanel;
+    public GameObject pausePanel;
 
+
+    private bool isGameOver=false;
+     
     void Update()
     {
+        if (isGameOver)
+        {
+            return;
+        }
+    
         HandleMovementInput();
+        CheckForEscapeKey();
 
-        /*
-                if (Input.GetAxis("Horizontal") > 0 && Input.GetAxis("Jump")==0)
-                {
-                    rigidbody2D.velocity = new Vector2(speed, 0f);
-                }
-                else if (Input.GetAxis("Horizontal") < 0 && Input.GetAxis("Jump") == 0)
-                {
-                    rigidbody2D.velocity = new Vector2(-speed, 0f);
-                }
-                else if(Input.GetAxis("Vertical")> 0 && Input.GetAxis("Jump") == 0)
-                {
-                    rigidbody2D.velocity = new Vector2( 0f, speed);
-                }
-                else if(Input.GetAxis("Vertical") < 0 && Input.GetAxis("Jump") == 0)
-                {
-                    rigidbody2D.velocity = new Vector2(0f ,- speed);
-                }
-                else if(Input.GetAxis("Horizontal")==0 & Input.GetAxis("Horizontal")==0)
-                {
-                    rigidbody2D.velocity = new Vector2(0f, 0f);
-                }
-                */
     }
-
 
     void HandleMovementInput()
     {
@@ -53,7 +42,40 @@ public class Playercontroller : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag=="door")
+        if (other.tag == "door")
+        {
             Debug.Log("you won");
+            gameWonPanel.SetActive(true);
+            isGameOver = true;
+        }
+        if (other.tag == "Enemy")
+        {
+            Debug.Log("you lost");
+            gameLostPanel.SetActive(true);
+            isGameOver = true;
+        }
+
+
+    }
+
+    void CheckForEscapeKey()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Escape key pressed");
+            pausePanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        pausePanel.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        Debug.Log("restart");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
