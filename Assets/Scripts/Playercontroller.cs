@@ -8,10 +8,6 @@ public class Playercontroller : MonoBehaviour
 
     public Rigidbody2D rigidbody2D;
     public float speed;
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -20,19 +16,15 @@ public class Playercontroller : MonoBehaviour
         /*
                 if (Input.GetAxis("Horizontal") > 0 && Input.GetAxis("Jump")==0)
                 {
-
                     rigidbody2D.velocity = new Vector2(speed, 0f);
-
                 }
                 else if (Input.GetAxis("Horizontal") < 0 && Input.GetAxis("Jump") == 0)
                 {
                     rigidbody2D.velocity = new Vector2(-speed, 0f);
-
                 }
                 else if(Input.GetAxis("Vertical")> 0 && Input.GetAxis("Jump") == 0)
                 {
                     rigidbody2D.velocity = new Vector2( 0f, speed);
-
                 }
                 else if(Input.GetAxis("Vertical") < 0 && Input.GetAxis("Jump") == 0)
                 {
@@ -40,13 +32,9 @@ public class Playercontroller : MonoBehaviour
                 }
                 else if(Input.GetAxis("Horizontal")==0 & Input.GetAxis("Horizontal")==0)
                 {
-
                     rigidbody2D.velocity = new Vector2(0f, 0f);
                 }
-
                 */
-     
-
     }
 
 
